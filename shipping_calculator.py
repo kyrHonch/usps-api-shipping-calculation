@@ -12,7 +12,7 @@ headers = {
 }
 
 payload = {
-    "originZIPCode": "07310",
+    "originZIPCode": "12345",
     "destinationZIPCode": "90210",
     "weight": 1,
     "length": 12,
