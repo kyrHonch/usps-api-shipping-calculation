@@ -7,23 +7,24 @@ oauth_token = get_oauth_token()
 
 url = "https://api.usps.com/addresses/v3/address"
 
-payload = {}
-
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {oauth_token}",
 }
 query_parameters = {
-    "streetAddress": "Number street, street",
+    "streetAddress": "Address",
+    "secondaryAddress": "Apartment Number",
     "city": "City",  # Says Optional, yet it is required
     "state": "ST"
 }
 result = requests.get(url, headers=headers, params=query_parameters)
-data=result.json()
+data = result.json()
 if result.status_code != 200:
-    print(f"Error:{data['error']['message']}")
+    print(f"Error ({result.status_code}:{data['error']['message']}")
 else:
     print("Address")
     for field in data['address']:
         if data['address'][field] is not None:
             print(f"{field}: {data['address'][field]}")
+
+    print(f"Matches: {data['matches']}")
